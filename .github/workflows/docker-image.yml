@@ -20,7 +20,11 @@ jobs:
 
     - name: Release/os of the github action runner
       run: |
+       uname-a
+       cat /etc/issue
+       touch abc.txt
 
-    uname-a
-    cat /etc/issue
-    touch abc.txt
+    - name: Build the Docker image
+      run: | 
+        docker images
+        dockere ps -a
