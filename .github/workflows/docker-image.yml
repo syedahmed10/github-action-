@@ -7,24 +7,19 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag syedahmedimage:$(date +%s)
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Release/os of the github action runner
-      run: |
-       uname-a
-       cat /etc/issue
-       touch abc.txt
+      - name: Build Docker Image
+        run: docker build -t syedahmedimage:${{ github.run_number }} .
 
-    - name: Build the Docker image
-      run: | 
-        docker images
-        dockere ps -a
+      - name: Debug Info
+        run: |
+          uname -a
+          cat /etc/issue
+          docker images
+          docker ps -a
