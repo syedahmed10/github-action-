@@ -1,4 +1,4 @@
-name: My Docker Image CI
+name: Docker Build CI
 
 on:
   push:
@@ -11,15 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker Image
-        run: docker build -t syedahmedimage:${{ github.run_number }} .
-
-      - name: Debug Info
+      - name: Build Docker image
         run: |
-          uname -a
-          cat /etc/issue
-          docker images
-          docker ps -a
+          echo "Starting Docker build..."
+          docker build -t syedahmedimage:latest .
+          
+      - name: List Docker images
+        run: docker images
